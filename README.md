@@ -127,7 +127,7 @@ npx prisma studio
 Development
 
 ```bash
-npm run start:dev
+npm run start
 ```
 
 Production
@@ -153,8 +153,8 @@ Body
 
 ```json
 {
-  "name": "John Doe",
-  "email": "john@example.com",
+  "name": "test",
+  "email": "test@example.com",
   "password": "123456"
 }
 ```
@@ -173,7 +173,7 @@ Body
 
 ```json
 {
-  "email": "john@example.com",
+  "email": "test@example.com",
   "password": "123456"
 }
 ```
@@ -296,9 +296,9 @@ Body
 
 ```json
 {
-  "customerName": "John Doe",
-  "customerEmail": "john@example.com",
-  "customerPhone": "0771234567",
+  "customerName": "test",
+  "customerEmail": "test@example.com",
+  "customerPhone": "0123456789",
   "serviceId": "SERVICE_ID",
   "bookingDate": "2026-07-20",
   "bookingTime": "10:00",
