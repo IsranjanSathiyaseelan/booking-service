@@ -1,0 +1,41 @@
+version: "3.9"
+
+services:
+  postgres:
+    image: postgres:16-alpine
+    container_name: booking-postgres
+
+    restart: unless-stopped
+
+    environment:
+      POSTGRES_DB: booking_platform
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+
+    ports:
+      - "5432:5432"
+
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+  backend:
+    build: .
+
+    container_name: booking-backend
+
+    depends_on:
+      - postgres
+
+    restart: unless-stopped
+
+    ports:
+      - "3000:3000"
+
+    environment:
+      DATABASE_URL: postgresql://postgres:password@postgres:5432/booking_platform?schema=public
+      JWT_SECRET: mysecret
+      JWT_EXPIRES_IN: 1d
+      PORT: 3000
+
+volumes:
+  postgres_data:
