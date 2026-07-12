@@ -38,22 +38,24 @@ export class BookingsService {
         'Booking date cannot be in the past',
       );
     }
-
+    
+    //Prevent duplicate bookings for the same service + date + time
     const existingBooking = await this.prisma.booking.findFirst({
-    where: {
-      bookingDate: new Date(createBookingDto.bookingDate),
-      bookingTime: createBookingDto.bookingTime,
-      status: {
-        not: BookingStatus.CANCELLED,
+      where: {
+        serviceId: createBookingDto.serviceId,
+        bookingDate: new Date(createBookingDto.bookingDate),
+        bookingTime: createBookingDto.bookingTime,
+        status: {
+          not: BookingStatus.CANCELLED,
+        },
       },
-    },
-  });
+    });
 
-  if (existingBooking) {
-    throw new BadRequestException(
-      'This time slot is already booked.',
-    );
-  }
+    if (existingBooking) {
+      throw new BadRequestException(
+        'This service is already booked for the selected date and time.',
+      );
+    }
 
     return this.prisma.booking.create({
       data: {
