@@ -89,11 +89,11 @@ npm install
 Create a `.env` file.
 
 ```env
-DATABASE_URL="postgresql://postgres:password@localhost:5432/booking_platform?schema=public"
+DATABASE_URL=""
 
 JWT_SECRET="your-secret-key"
 
-JWT_EXPIRES_IN="1d"
+JWT_EXPIRES_IN="7d"
 
 PORT=3000
 ```
